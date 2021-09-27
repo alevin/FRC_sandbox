@@ -229,6 +229,12 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     // m_myRobot.tankDrive(m_mController.getY(Hand.kLeft),
     // m_mController.getY(Hand.kRight));
+
+    boolean reset_yaw_button_pressed = m_mController.getAButton();
+    if (reset_yaw_button_pressed) {
+      ahrs.zeroYaw();
+    }
+
     m_myRobot.arcadeDrive(m_mController.getY(Hand.kLeft), m_mController.getX(Hand.kRight));
   }
 
