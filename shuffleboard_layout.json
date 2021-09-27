@@ -1,0 +1,337 @@
+{
+  "tabPane": [
+    {
+      "title": "LiveWindow",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "LiveWindow/",
+      "widgetPane": {
+        "gridSize": 128.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "tiles": {
+          "1,0": {
+            "size": [
+              3,
+              3
+            ],
+            "content": {
+              "_type": "Differential Drivebase",
+              "_source0": "network_table:///LiveWindow/Ungrouped/DifferentialDrive[1]",
+              "_title": "LiveWindow/Ungrouped/DifferentialDrive[1]",
+              "Wheels/Number of wheels": 8,
+              "Wheels/Wheel diameter": 43.0,
+              "Visuals/Show velocity vectors": true
+            }
+          },
+          "4,0": {
+            "size": [
+              3,
+              3
+            ],
+            "content": {
+              "_type": "Gyro",
+              "_source0": "network_table:///LiveWindow/Ungrouped/navX-Sensor",
+              "_title": "LiveWindow/Ungrouped/navX-Sensor",
+              "Visuals/Major tick spacing": 45.0,
+              "Visuals/Starting angle": 180.0,
+              "Visuals/Show tick mark ring": true,
+              "Visuals/Counter clockwise": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "NavX",
+      "autoPopulate": true,
+      "autoPopulatePrefix": "/SmartDashboard/IMU_",
+      "widgetPane": {
+        "gridSize": 128.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "tiles": {
+          "1,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Number Slider",
+              "_source0": "network_table:///SmartDashboard/NavX/IMU_Accel_X",
+              "_title": "SmartDashboard/NavX/IMU_Accel_X",
+              "Slider Settings/Min": -1.0,
+              "Slider Settings/Max": 1.0,
+              "Slider Settings/Block increment": 0.0625,
+              "Visuals/Display value": true
+            }
+          },
+          "3,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Number Slider",
+              "_source0": "network_table:///SmartDashboard/NavX/IMU_Accel_Y",
+              "_title": "SmartDashboard/NavX/IMU_Accel_Y",
+              "Slider Settings/Min": -1.0,
+              "Slider Settings/Max": 1.0,
+              "Slider Settings/Block increment": 0.0625,
+              "Visuals/Display value": true
+            }
+          },
+          "0,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/NavX/IMU_CompassHeading",
+              "_title": "SmartDashboard/NavX/IMU_CompassHeading"
+            }
+          },
+          "0,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Simple Dial",
+              "_source0": "network_table:///SmartDashboard/NavX/IMU_FusedHeading",
+              "_title": "SmartDashboard/NavX/IMU_FusedHeading",
+              "Range/Min": 0.0,
+              "Range/Max": 100.0,
+              "Visuals/Show value": true
+            }
+          },
+          "5,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/NavX/IMU_IsMoving",
+              "_title": "SmartDashboard/NavX/IMU_IsMoving",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "6,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/NavX/IMU_IsRotating",
+              "_title": "SmartDashboard/NavX/IMU_IsRotating",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "5,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/NavX/IMU_Connected",
+              "_title": "SmartDashboard/NavX/IMU_Connected",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "6,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/NavX/IMU_IsCalibrating",
+              "_title": "SmartDashboard/NavX/IMU_IsCalibrating",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "1,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Number Bar",
+              "_source0": "network_table:///SmartDashboard/NavX/Velocity_X",
+              "_title": "SmartDashboard/NavX/Velocity_X",
+              "Range/Min": -1.0,
+              "Range/Max": 1.0,
+              "Range/Center": 0.0,
+              "Visuals/Num tick marks": 5,
+              "Visuals/Show text": true
+            }
+          },
+          "3,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Number Bar",
+              "_source0": "network_table:///SmartDashboard/NavX/Velocity_Y",
+              "_title": "SmartDashboard/NavX/Velocity_Y",
+              "Range/Min": -1.0,
+              "Range/Max": 1.0,
+              "Range/Center": 0.0,
+              "Visuals/Num tick marks": 5,
+              "Visuals/Show text": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Can Bus",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 128.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "tiles": {
+          "3,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Can_Bus/Can bus recv errors",
+              "_title": "SmartDashboard/Can_Bus/Can bus recv errors"
+            }
+          },
+          "5,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Can_Bus/Can bus tx errors",
+              "_title": "SmartDashboard/Can_Bus/Can bus tx errors"
+            }
+          },
+          "3,1": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Simple Dial",
+              "_source0": "network_table:///SmartDashboard/Can_Bus/Can bus utilization",
+              "_title": "SmartDashboard/Can_Bus/Can bus utilization",
+              "Range/Min": 0.0,
+              "Range/Max": 100.0,
+              "Visuals/Show value": true
+            }
+          },
+          "5,1": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Simple Dial",
+              "_source0": "network_table:///SmartDashboard/Can_Bus/Can bus utilization",
+              "_title": "SmartDashboard/Can_Bus/Can bus utilization",
+              "Range/Min": 0.0,
+              "Range/Max": 10.0,
+              "Visuals/Show value": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Robot",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 128.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "tiles": {
+          "1,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Voltage View",
+              "_source0": "network_table:///SmartDashboard/RobotController/Battery Voltage:",
+              "_title": "SmartDashboard/RobotController/Battery Voltage:",
+              "Range/Min": 0.0,
+              "Range/Max": 14.0,
+              "Range/Center": 0.0,
+              "Visuals/Orientation": "HORIZONTAL",
+              "Visuals/Number of tick marks": 5
+            }
+          },
+          "3,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/RobotController/Input Current",
+              "_title": "SmartDashboard/RobotController/Input Current"
+            }
+          },
+          "1,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Voltage View",
+              "_source0": "network_table:///SmartDashboard/RobotController/Input Voltage",
+              "_title": "SmartDashboard/RobotController/Input Voltage",
+              "Range/Min": 0.0,
+              "Range/Max": 14.0,
+              "Range/Center": 0.0,
+              "Visuals/Orientation": "HORIZONTAL",
+              "Visuals/Number of tick marks": 5
+            }
+          },
+          "3,1": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Simple Dial",
+              "_source0": "network_table:///SmartDashboard/RobotController/Input Current",
+              "_title": "SmartDashboard/RobotController/Input Current",
+              "Range/Min": 0.0,
+              "Range/Max": 10.0,
+              "Visuals/Show value": true
+            }
+          }
+        }
+      }
+    }
+  ],
+  "windowGeometry": {
+    "x": 0.0,
+    "y": 0.0,
+    "width": 1280.0,
+    "height": 680.0
+  }
+}
