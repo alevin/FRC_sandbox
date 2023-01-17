@@ -140,9 +140,9 @@ spotless {
 }
 
 sonarqube {
-  properties {
-    property "sonar.projectKey", "alevin_FRC_sandbox"
-    property "sonar.organization", "alevin-github"
-    property "sonar.host.url", "https://sonarcloud.io"
-  }
+    properties {
+        property "sonar.projectKey", "alevin_FRC_sandbox"
+        property "sonar.organization", "alevin-github"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
 }
