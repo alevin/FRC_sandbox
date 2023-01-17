@@ -29,12 +29,13 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
-    - name: Change dir to 
-      run: cd ./2023/CommandRobotSingleMotor
     - name: Grant execute permission
+      working-directory: ./2023/CommandRobotSingleMotor
       run: chmod +x gradlew
     - name: Check formatting
+      working-directory: ./2023/CommandRobotSingleMotor
       run: ./gradlew spotlessCheck
     - name: Build and test
+      working-directory: ./2023/CommandRobotSingleMotor
       run: ./gradlew build
   
