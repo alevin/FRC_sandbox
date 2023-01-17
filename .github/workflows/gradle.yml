@@ -24,15 +24,15 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-    - name: Grant execute permission
-      run: chmod +x gradlew
     - name: Set up JDK 11
       uses: actions/setup-java@v3
       with:
         java-version: '11'
         distribution: 'temurin'
     - name: Change dir to 
-      run: cd ./2023/CommandRobotSingleMotor 
+      run: cd ./2023/CommandRobotSingleMotor
+    - name: Grant execute permission
+      run: chmod +x gradlew
     - name: Check formatting
       run: ./gradlew spotlessCheck
     - name: Build and test
