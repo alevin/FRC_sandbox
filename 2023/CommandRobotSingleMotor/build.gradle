@@ -1,8 +1,7 @@
 plugins {
     id "java"
-    id "edu.wpi.first.GradleRIO" version "2023.1.1"
+    id "edu.wpi.first.GradleRIO" version "2023.2.1"
     id "com.diffplug.spotless" version "6.13.0"
-    id "com.peterabeles.gversion" version "1.10"
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -103,22 +102,6 @@ tasks.withType(JavaCompile) {
 }
 
 
-def getCurrentGitBranch() {
-    def gitBranch = "Unknown branch"
-    try {
-        def workingDir = new File("${project.projectDir}")
-        def result = 'git rev-parse --abbrev-ref HEAD'.execute(null, workingDir)
-        result.waitFor()
-        if (result.exitValue() == 0) {
-            gitBranch = result.text.trim()
-        }
-    } catch (e) {
-    }
-    print "Current branch: " + gitBranch
-    return gitBranch
-}
-
-
 // Spotless formatting
 project.compileJava.dependsOn(spotlessApply)
 spotless {
@@ -129,7 +112,7 @@ spotless {
         }
         toggleOffOn()
         googleJavaFormat()
-        removeUnusedImports()
+        //removeUnusedImports()
         trimTrailingWhitespace()
         endWithNewline()
         licenseHeader("// Copyright (c) 2023 FRC 6328\n// http://github.com/Mechanical-Advantage\n//\n// Use of this source code is governed by an MIT-style\n// license that can be found in the LICENSE file at\n// the root directory of this project.\n\n")
