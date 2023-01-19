@@ -120,6 +120,10 @@ public class LEDStrip {
       case Colors.ORANGE:
         hue = 11;
         break;
+
+      default:
+        hue = 0;
+        break;
     }
     // System.out.println("LED H" + hue + " - " + color );
     if (this.mode == 0) {
