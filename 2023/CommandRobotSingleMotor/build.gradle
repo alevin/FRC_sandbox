@@ -117,7 +117,7 @@ spotless {
         trimTrailingWhitespace()
         endWithNewline()
         licenseHeader("// Copyright (c) FIRST and other WPILib contributors\n//2023 FRC 5507\n// http://github.com/gwhs\n//\n// Open Source Software; you can modify and/or share it under the terms of\n// the WPILib BSD license file in the root directory of this project.\n\n")
-        }
+    }
     groovyGradle {
         target fileTree(".") {
             include "**/*.gradle"
@@ -141,6 +141,7 @@ spotless {
 
 sonarqube {
     properties {
+        property "sonar.projectName", "alevin_CommandRobotSingleMotor"
         property "sonar.projectKey", "alevin_FRC_sandbox"
         property "sonar.organization", "alevin-github"
         property "sonar.host.url", "https://sonarcloud.io"

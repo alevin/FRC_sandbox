@@ -1,9 +1,9 @@
-// Copyright (c) 2023 FRC 6328
-// http://github.com/Mechanical-Advantage
+// Copyright (c) FIRST and other WPILib contributors
+//2023 FRC 5507
+// http://github.com/gwhs
 //
-// Use of this source code is governed by an MIT-style
-// license that can be found in the LICENSE file at
-// the root directory of this project.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
 
 package harkerrobolib.util;
 
