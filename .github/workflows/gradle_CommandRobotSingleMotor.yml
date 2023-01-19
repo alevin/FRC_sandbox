@@ -43,13 +43,13 @@ jobs:
       working-directory: ./2023/CommandRobotSingleMotor
       run: ./gradlew build
     - name: Cache SonarCloud packages
-      uses: actions/cache@v1
+      uses: actions/cache@v3
       with:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
     - name: Cache Gradle packages
-      uses: actions/cache@v1
+      uses: actions/cache@v3
       with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
@@ -60,6 +60,3 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       working-directory: ./2023/CommandRobotSingleMotor
       run: ./gradlew build sonarqube --info
-  
-
-  
