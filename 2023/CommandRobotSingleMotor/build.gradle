@@ -141,7 +141,7 @@ spotless {
 
 sonarqube {
     properties {
-        //property "sonar.projectName", "alevin_CommandRobotSingleMotor"
+        property "sonar.projectName", "alevin_CommandRobotSingleMotor"
         property "sonar.projectKey", "alevin_CommandRobotSingleMotor"
         property "sonar.organization", "alevin-github"
         property "sonar.host.url", "https://sonarcloud.io"
