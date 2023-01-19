@@ -7,11 +7,8 @@
 
 package frc.lib5507.led;
 
-// import java.awt.Color;
-
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
-// import frc.robot.Constants.LEDS.Colors;
 import frc.lib5507.led.LEDStrip.LEDS.Colors;
 
 public class LEDStrip {
