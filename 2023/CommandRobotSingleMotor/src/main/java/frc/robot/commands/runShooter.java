@@ -21,9 +21,10 @@ public class runShooter extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
-  // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    // TODO: Called when the command is initially scheduled.
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -31,9 +32,10 @@ public class runShooter extends CommandBase {
     shooter.runShooter(RobotContainer.driverJoystick);
   }
 
-  // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    // TODO: Called once the command ends or is interrupted.
+  }
 
   // Returns true when the command should end.
   @Override
