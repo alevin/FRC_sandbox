@@ -21,6 +21,6 @@ public final class Constants {
   public static final double SPEED = 0.5;
 
   public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
+    public static final int DRIVER_CONTROLLER_PORT = 0;
   }
 }

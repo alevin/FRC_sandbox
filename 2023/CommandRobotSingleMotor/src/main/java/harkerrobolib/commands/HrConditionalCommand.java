@@ -17,10 +17,10 @@ import java.util.function.BooleanSupplier;
  * @author Jatin Kohli
  * @since February 12, 2019
  */
-public class ConditionalCommand extends edu.wpi.first.wpilibj2.command.ConditionalCommand {
+public class HrConditionalCommand extends edu.wpi.first.wpilibj2.command.ConditionalCommand {
   private BooleanSupplier condition;
 
-  public ConditionalCommand(BooleanSupplier condition, Command trueCommand) {
+  public HrConditionalCommand(BooleanSupplier condition, Command trueCommand) {
     super(
         trueCommand,
         new PrintCommand("ConditionalCommand w/ no false command had false condition"),
@@ -28,7 +28,8 @@ public class ConditionalCommand extends edu.wpi.first.wpilibj2.command.Condition
     this.condition = condition;
   }
 
-  public ConditionalCommand(BooleanSupplier condition, Command trueCommand, Command falseCommand) {
+  public HrConditionalCommand(
+      BooleanSupplier condition, Command trueCommand, Command falseCommand) {
     super(trueCommand, falseCommand, condition);
     this.condition = condition;
   }
