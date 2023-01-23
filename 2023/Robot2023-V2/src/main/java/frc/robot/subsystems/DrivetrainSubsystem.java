@@ -29,7 +29,7 @@ import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.lib5507.hardwareWrappers.gyro.WrapperedGyro;
+import frc.lib5507.wrappers.gyro.WrapperedGyro;
 // import frc.lib5507.hardwareWrappers.Gyro.WrapperedGyro.GyroType;
 import frc.robot.Constants;
 import frc.robot.Constants.AutoConstants;

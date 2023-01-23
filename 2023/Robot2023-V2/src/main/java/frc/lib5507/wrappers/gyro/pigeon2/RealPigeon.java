@@ -1,16 +1,16 @@
-package frc.lib5507.hardwareWrappers.gyro.pigeon2;
+package frc.lib5507.wrappers.gyro.pigeon2;
 
-// import com.kauailabs.navx.frc.AHRS;
+
 import static frc.robot.Constants.DrivetrainConstants.CANIVORE_NAME;
 import static frc.robot.Constants.DrivetrainConstants.PIGEON_ID;
 
 import com.ctre.phoenix.sensors.WPI_Pigeon2;
 import edu.wpi.first.math.util.Units;
-import frc.lib5507.hardwareWrappers.gyro.AbstractGyro;
+import frc.lib5507.wrappers.gyro.AbstractGyro;
 
 public class RealPigeon extends AbstractGyro {
 
-  // AHRS ahrs;
+  
   private final WPI_Pigeon2 pigeon = new WPI_Pigeon2(PIGEON_ID, CANIVORE_NAME);
 
   public RealPigeon() {
@@ -51,11 +51,4 @@ public class RealPigeon extends AbstractGyro {
     pigeon.setYaw(angleDeg);
   }
 
-  // @Override
-  //   public Rotation2d getGyroscopeRotation() {
-  //   return pigeon.getRotation2d();
-  //   // We have to invert the angle of the NavX so that rotating the robot counter-clockwise makes
-  //   // the angle increase.
-  //   // return Rotation2d.fromDegrees(360.0 - navx.getYaw());
-  // }
 }

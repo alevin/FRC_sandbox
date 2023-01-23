@@ -1,4 +1,4 @@
-package frc.lib5507.hardwareWrappers.gyro;
+package frc.lib5507.wrappers.gyro;
 
 public abstract class AbstractGyro {
 

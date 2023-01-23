@@ -1,8 +1,8 @@
-package frc.lib5507.hardwareWrappers.gyro;
+package frc.lib5507.wrappers.gyro;
 
 import edu.wpi.first.math.geometry.Rotation2d;
-import frc.lib5507.hardwareWrappers.gyro.navx.RealNavx;
-import frc.lib5507.hardwareWrappers.gyro.pigeon2.RealPigeon;
+import frc.lib5507.wrappers.gyro.navx.RealNavx;
+import frc.lib5507.wrappers.gyro.pigeon2.RealPigeon;
 
 public class WrapperedGyro {
 

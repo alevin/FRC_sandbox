@@ -1,9 +1,9 @@
-package frc.lib5507.hardwareWrappers.gyro.navx;
+package frc.lib5507.wrappers.gyro.navx;
 
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.SPI.Port;
-import frc.lib5507.hardwareWrappers.gyro.AbstractGyro;
+import frc.lib5507.wrappers.gyro.AbstractGyro;
 
 public class RealNavx extends AbstractGyro {
 
