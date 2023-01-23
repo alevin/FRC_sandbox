@@ -1,8 +1,8 @@
-package frc.lib5507.hardwareWrappers.Gyro;
+package frc.lib5507.hardwareWrappers.gyro;
 
 import edu.wpi.first.math.geometry.Rotation2d;
-import frc.lib5507.hardwareWrappers.Gyro.NavX.RealNavx;
-import frc.lib5507.hardwareWrappers.Gyro.Pigeon2.RealPigeon;
+import frc.lib5507.hardwareWrappers.gyro.navx.RealNavx;
+import frc.lib5507.hardwareWrappers.gyro.pigeon2.RealPigeon;
 
 public class WrapperedGyro {
 
@@ -18,9 +18,9 @@ public class WrapperedGyro {
 
   // public WrapperedGyro(GyroType type) {
   public WrapperedGyro(String type) {
-    if (type == "NAVX") {
+    if (type != null && type.equals("NAVX")) {
       gyro = new RealNavx();
-    } else if (type == "PIGEON") {
+    } else if (type != null && type.equals("PIGEON")) {
       gyro = new RealPigeon();
     } else {
       gyro = null;

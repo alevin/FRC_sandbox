@@ -1,4 +1,4 @@
-package frc.lib5507.hardwareWrappers.Gyro.Pigeon2;
+package frc.lib5507.hardwareWrappers.gyro.pigeon2;
 
 // import com.kauailabs.navx.frc.AHRS;
 import static frc.robot.Constants.DrivetrainConstants.CANIVORE_NAME;
@@ -6,7 +6,7 @@ import static frc.robot.Constants.DrivetrainConstants.PIGEON_ID;
 
 import com.ctre.phoenix.sensors.WPI_Pigeon2;
 import edu.wpi.first.math.util.Units;
-import frc.lib5507.hardwareWrappers.Gyro.AbstractGyro;
+import frc.lib5507.hardwareWrappers.gyro.AbstractGyro;
 
 public class RealPigeon extends AbstractGyro {
 
