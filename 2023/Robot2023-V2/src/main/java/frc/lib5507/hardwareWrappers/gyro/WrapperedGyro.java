@@ -7,16 +7,10 @@ import frc.lib5507.hardwareWrappers.gyro.pigeon2.RealPigeon;
 public class WrapperedGyro {
 
   AbstractGyro gyro;
-  double offset_rad = 0;
+  double offsetRad = 0;
 
-  // public enum GyroType {
-  //   NAVX,
-  //   PIGEON
-  // }
+  private double curAngleRad;
 
-  private double curAngle_rad;
-
-  // public WrapperedGyro(GyroType type) {
   public WrapperedGyro(String type) {
     if (type != null && type.equals("NAVX")) {
       gyro = new RealNavx();
@@ -30,11 +24,11 @@ public class WrapperedGyro {
   public void update() {
     // Gyros are inverted in reference frame (positive clockwise)
     // and we maintain our own offset in code when rezeroing.
-    curAngle_rad = gyro.getRawAngle() * -1.0 + offset_rad;
+    curAngleRad = gyro.getRawAngle() * -1.0 + offsetRad;
   }
 
-  public void reset(double curAngle_rad) {
-    offset_rad = curAngle_rad;
+  public void reset(double curAngleRad) {
+    offsetRad = curAngleRad;
     gyro.reset();
   }
 
@@ -42,12 +36,12 @@ public class WrapperedGyro {
     gyro.calibrate();
   }
 
-  public double getRate_radpersec() {
+  public double getRateRadpersec() {
     return gyro.getRate();
   }
 
-  public double getAngle_rad() {
-    return curAngle_rad;
+  public double getAngleRad() {
+    return curAngleRad;
   }
 
   public boolean isConnected() {
@@ -55,11 +49,11 @@ public class WrapperedGyro {
   }
 
   public void setYaw(double angleDeg) {
-    // new Rotation2d(this.getAngle_rad());
+    // new Rotation2d(this.getAngleRad());
 
   }
 
   public Rotation2d getRotation2d() {
-    return new Rotation2d(this.getAngle_rad());
+    return new Rotation2d(this.getAngleRad());
   }
 }
