@@ -1,11 +1,10 @@
 package frc.robot.pathfind;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import frc.robot.pathfind.util.Doubles;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Obstacle {
   PolygonDouble polygon;
@@ -23,11 +22,11 @@ public class Obstacle {
   /**
    * Creates a polygon that's offset by the distance passed in.
    *
-   * Makes a copy of each point of the polygon, offset by a vector
-   * at 90deg from the angle of the edges, then connects them together.
+   * <p>Makes a copy of each point of the polygon, offset by a vector at 90deg from the angle of the
+   * edges, then connects them together.
    *
-   * Has functionality in place to prevent issues with concave shapes
-   * having overlapping lines and other weirdness.
+   * <p>Has functionality in place to prevent issues with concave shapes having overlapping lines
+   * and other weirdness.
    *
    * @param distance Distance to expand the shape outwards by.
    * @return New obstacle, which has the distance passed in added to all sides.
@@ -38,25 +37,23 @@ public class Obstacle {
     for (int i = 0; i < polygon.npoints; i++) {
       offsetEdges.add(
           new ObstacleEdge(
-              polygon.xpoints[i],
-              polygon.ypoints[i],
-              polygon.xpoints[(i + 1) % polygon.npoints],
-              polygon.ypoints[(i + 1) % polygon.npoints]).offset(distance));
+                  polygon.xpoints[i],
+                  polygon.ypoints[i],
+                  polygon.xpoints[(i + 1) % polygon.npoints],
+                  polygon.ypoints[(i + 1) % polygon.npoints])
+              .offset(distance));
     }
     List<Double> xPoints = new ArrayList<>();
     List<Double> yPoints = new ArrayList<>();
 
-    // Loop through all edges, checking if there's an intersection between any of
-    // them.
+    // Loop through all edges, checking if there's an intersection between any of them.
     // If an intersection does occur, cut the point off at that intersection,
-    // Creating a new point at the intersection, which should be the correct
-    // distance away.
+    // Creating a new point at the intersection, which should be the correct distance away.
     for (int i = 0; i < offsetEdges.size(); i++) {
       ObstacleEdge edge = offsetEdges.get(i);
       // Check against every other edge, including last -> first
       for (int j = i + 1; j <= offsetEdges.size(); j++) {
-        // Wrap edges back to beginning so the last edge can be checked against the
-        // first one
+        // Wrap edges back to beginning so the last edge can be checked against the first one
         ObstacleEdge otherEdge = offsetEdges.get(j % offsetEdges.size());
         Translation2d intersectionPoint = edge.findIntersectionPoint(otherEdge);
         if (intersectionPoint == null && !edge.hasBeenPlotted()) {
@@ -122,14 +119,12 @@ public class Obstacle {
       // Create offset vector using distance and angles
       Translation2d offset = new Translation2d(distance, 0).rotateBy(transformAngle);
       // Add offset to points
-      return new ObstacleEdge(
-          point1.plus(offset),
-          point2.plus(offset));
+      return new ObstacleEdge(point1.plus(offset), point2.plus(offset));
     }
 
     /**
-     * This is heavily based on an algorithm in the
-     * "Tricks of the Windows Game Programming Gurus" book by Andre LeMothe
+     * This is heavily based on an algorithm in the "Tricks of the Windows Game Programming Gurus"
+     * book by Andre LeMothe
      *
      * @param other
      * @return
@@ -145,13 +140,19 @@ public class Obstacle {
       double s2_y = other.point2.getY() - other.point1.getY();
 
       double s, t;
-      // Denominator portion of below equations, split into variable because it's the
-      // same between the two
+      // Denominator portion of below equations, split into variable because it's the same between
+      // the two
       double d = -s2_x * s1_y + s1_x * s2_y;
 
       // Magical math that I need to look into how it works more
-      s = (-s1_y * (this.point1.getX() - other.point1.getX()) + s1_x * (this.point1.getY() - other.point1.getY())) / d;
-      t = (s2_x * (this.point1.getY() - other.point1.getY()) - s2_y * (this.point1.getX() - other.point1.getX())) / d;
+      s =
+          (-s1_y * (this.point1.getX() - other.point1.getX())
+                  + s1_x * (this.point1.getY() - other.point1.getY()))
+              / d;
+      t =
+          (s2_x * (this.point1.getY() - other.point1.getY())
+                  - s2_y * (this.point1.getX() - other.point1.getX()))
+              / d;
 
       double i_x, i_y;
       if (s >= 0 && s <= 1 && t >= 0 && t <= 1) {
@@ -161,7 +162,6 @@ public class Obstacle {
         return new Translation2d(i_x, i_y);
       }
       return null;
-
     }
 
     public String toString() {

@@ -4,21 +4,22 @@ import static frc.robot.Constants.TeleopDriveConstants.ROTATION_RATE_LIMIT;
 import static frc.robot.Constants.TeleopDriveConstants.X_RATE_LIMIT;
 import static frc.robot.Constants.TeleopDriveConstants.Y_RATE_LIMIT;
 
-import java.util.function.DoubleSupplier;
-import java.util.function.Supplier;
-
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DrivetrainSubsystem;
+import java.util.function.DoubleSupplier;
+import java.util.function.Supplier;
 
 /**
- * Command for teleop driving where translation is field oriented and rotation velocity is controlled by the driver.
- * 
- * Translation is specified on the field-relative coordinate system. The Y-axis runs parallel to the alliance wall, left
- * is positive. The X-axis runs down field toward the opposing alliance wall, away from the alliance wall is positive.
+ * Command for teleop driving where translation is field oriented and rotation velocity is
+ * controlled by the driver.
+ *
+ * <p>Translation is specified on the field-relative coordinate system. The Y-axis runs parallel to
+ * the alliance wall, left is positive. The X-axis runs down field toward the opposing alliance
+ * wall, away from the alliance wall is positive.
  */
 public class FieldOrientedDriveCommand extends CommandBase {
   private final DrivetrainSubsystem drivetrainSubsystem;
@@ -33,6 +34,7 @@ public class FieldOrientedDriveCommand extends CommandBase {
 
   /**
    * Constructor
+   *
    * @param drivetrainSubsystem drivetrain
    * @param robotAngleSupplier supplier for the current angle of the robot
    * @param translationXSupplier supplier for translation X component, in meters per second
@@ -60,10 +62,13 @@ public class FieldOrientedDriveCommand extends CommandBase {
 
     // Calculate field relative speeds
     var chassisSpeeds = drivetrainSubsystem.getChassisSpeeds();
-    var fieldSpeeds = 
-        new Translation2d(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond).rotateBy(robotAngle);
-    var robotSpeeds = new ChassisSpeeds(fieldSpeeds.getX(), fieldSpeeds.getY(), chassisSpeeds.omegaRadiansPerSecond);
-    
+    var fieldSpeeds =
+        new Translation2d(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond)
+            .rotateBy(robotAngle);
+    var robotSpeeds =
+        new ChassisSpeeds(
+            fieldSpeeds.getX(), fieldSpeeds.getY(), chassisSpeeds.omegaRadiansPerSecond);
+
     // Reset the slew rate limiters, in case the robot is already moving
     translateXRateLimiter.reset(robotSpeeds.vxMetersPerSecond);
     translateYRateLimiter.reset(robotSpeeds.vyMetersPerSecond);

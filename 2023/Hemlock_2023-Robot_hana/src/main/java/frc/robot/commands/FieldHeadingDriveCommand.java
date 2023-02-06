@@ -11,28 +11,27 @@ import static frc.robot.Constants.TeleopDriveConstants.X_RATE_LIMIT;
 import static frc.robot.Constants.TeleopDriveConstants.Y_RATE_LIMIT;
 import static java.lang.Math.PI;
 
-import java.util.function.DoubleSupplier;
-import java.util.function.Supplier;
-
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DrivetrainSubsystem;
+import java.util.function.DoubleSupplier;
+import java.util.function.Supplier;
 
 /**
  * Command for teleop driving where translation and heading are field oriented.
- * 
- * Translation is specified on the field-relative coordinate system. The Y-axis runs parallel to the alliance wall, left
- * is positive. The X-axis runs down field toward the opposing alliance wall, away from the alliance wall is positive.
- * 
- * Rotation is specified as a point to make it easy to use with a joystick. The heading is the angle from the X-axis
- * to the point.
+ *
+ * <p>Translation is specified on the field-relative coordinate system. The Y-axis runs parallel to
+ * the alliance wall, left is positive. The X-axis runs down field toward the opposing alliance
+ * wall, away from the alliance wall is positive.
+ *
+ * <p>Rotation is specified as a point to make it easy to use with a joystick. The heading is the
+ * angle from the X-axis to the point.
  */
 public class FieldHeadingDriveCommand extends CommandBase {
 
@@ -50,7 +49,7 @@ public class FieldHeadingDriveCommand extends CommandBase {
 
   /**
    * Constructor.
-   * 
+   *
    * @param drivetrainSubsystem drivetrain subsystem
    * @param robotAngleSupplier supplier for the robot's current heading
    * @param translationXSupplier supplier for field-oriented X velocity in meters/sec
@@ -75,10 +74,11 @@ public class FieldHeadingDriveCommand extends CommandBase {
 
     addRequirements(drivetrainSubsystem);
 
-    TrapezoidProfile.Constraints kThetaControllerConstraints = 
+    TrapezoidProfile.Constraints kThetaControllerConstraints =
         new TrapezoidProfile.Constraints(HEADING_MAX_VELOCITY, HEADING_MAX_ACCELERATION);
-        
-    thetaController = new ProfiledPIDController(HEADING_kP, HEADING_kI, HEADING_kD, kThetaControllerConstraints);
+
+    thetaController =
+        new ProfiledPIDController(HEADING_kP, HEADING_kI, HEADING_kD, kThetaControllerConstraints);
     thetaController.enableContinuousInput(-PI, PI);
     thetaController.setTolerance(Units.degreesToRadians(HEADING_TOLERANCE));
   }
@@ -90,11 +90,15 @@ public class FieldHeadingDriveCommand extends CommandBase {
     // Reset the theta controller to the current heading
     thetaController.reset(robotAngle.getRadians());
 
-    // Calculate field relative speeds by rotating the chasis relative speeds by the robot's angle on the field
+    // Calculate field relative speeds
     var chassisSpeeds = drivetrainSubsystem.getChassisSpeeds();
-    var fieldSpeeds = 
-        new Translation2d(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond).rotateBy(robotAngle);
-    var robotSpeeds = new ChassisSpeeds(fieldSpeeds.getX(), fieldSpeeds.getY(), chassisSpeeds.omegaRadiansPerSecond);
+    var robotSpeeds =
+        new ChassisSpeeds(
+            chassisSpeeds.vxMetersPerSecond * robotAngle.getCos()
+                - chassisSpeeds.vyMetersPerSecond * robotAngle.getSin(),
+            chassisSpeeds.vyMetersPerSecond * robotAngle.getCos()
+                + chassisSpeeds.vxMetersPerSecond * robotAngle.getSin(),
+            chassisSpeeds.omegaRadiansPerSecond);
 
     // Reset the slew rate limiters, in case the robot is already moving
     translateXRateLimiter.reset(robotSpeeds.vxMetersPerSecond);
@@ -105,7 +109,9 @@ public class FieldHeadingDriveCommand extends CommandBase {
   public void execute() {
     final var omegaX = omegaXSupplier.getAsDouble();
     final var omegaY = omegaYSupplier.getAsDouble();
-    final var centered = MathUtil.applyDeadband(omegaX, DEADBAND) == 0 && MathUtil.applyDeadband(omegaY, DEADBAND) == 0;
+    final var centered =
+        MathUtil.applyDeadband(omegaX, DEADBAND) == 0
+            && MathUtil.applyDeadband(omegaY, DEADBAND) == 0;
 
     Rotation2d heading;
     if (centered) {
@@ -117,21 +123,22 @@ public class FieldHeadingDriveCommand extends CommandBase {
     }
 
     // Calculate the angular rate for the robot to turn
-    var omega = thetaController.calculate(robotAngleSupplier.get().getRadians(), heading.getRadians());
+    var omega =
+        thetaController.calculate(robotAngleSupplier.get().getRadians(), heading.getRadians());
     if (thetaController.atGoal() || centered) {
       omega = 0;
     }
 
-    drivetrainSubsystem.drive(ChassisSpeeds.fromFieldRelativeSpeeds(
-        translateXRateLimiter.calculate(xSupplier.getAsDouble()),
-        translateYRateLimiter.calculate(ySupplier.getAsDouble()),
-        omega,
-        robotAngleSupplier.get()));
+    drivetrainSubsystem.drive(
+        ChassisSpeeds.fromFieldRelativeSpeeds(
+            translateXRateLimiter.calculate(xSupplier.getAsDouble()),
+            translateYRateLimiter.calculate(ySupplier.getAsDouble()),
+            omega,
+            robotAngleSupplier.get()));
   }
 
   @Override
   public void end(boolean interrupted) {
     drivetrainSubsystem.stop();
   }
-  
 }

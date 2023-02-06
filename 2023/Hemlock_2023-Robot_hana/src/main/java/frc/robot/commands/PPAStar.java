@@ -1,20 +1,12 @@
 package frc.robot.commands;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import com.pathplanner.lib.PathConstraints;
 import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.PathPoint;
 import com.pathplanner.lib.commands.PPSwerveControllerCommand;
-
-import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.pathfind.Edge;
 import frc.robot.pathfind.Node;
@@ -22,7 +14,9 @@ import frc.robot.pathfind.Obstacle;
 import frc.robot.pathfind.VisGraph;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.PoseEstimatorSubsystem;
-import frc.robot.util.FieldConstants;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class PPAStar extends CommandBase {
   private final DrivetrainSubsystem driveSystem;
@@ -34,15 +28,22 @@ public class PPAStar extends CommandBase {
   private final List<Obstacle> obstacles;
   private VisGraph AStarMap;
 
-  public PPAStar(DrivetrainSubsystem d, PoseEstimatorSubsystem p, PathConstraints constraints, Node finalPosition,
-      List<Obstacle> obstacles, VisGraph AStarMap) {
+  public PPAStar(
+      DrivetrainSubsystem d,
+      PoseEstimatorSubsystem p,
+      PathConstraints constraints,
+      Node finalPosition,
+      List<Obstacle> obstacles,
+      VisGraph AStarMap) {
     this.driveSystem = d;
     this.poseEstimatorSystem = p;
     this.constraints = constraints;
     this.obstacles = obstacles;
     this.finalPosition = finalPosition;
     this.AStarMap = AStarMap;
-    this.startPoint = new Node(p);
+    this.startPoint =
+        new Node(
+            p.getCurrentPose().getX(), p.getCurrentPose().getY(), p.getCurrentPose().getRotation());
 
     addRequirements(driveSystem, poseEstimatorSystem);
   }
@@ -51,14 +52,11 @@ public class PPAStar extends CommandBase {
   // Per-schedule setup code.
   @Override
   public void initialize() {
-    if(DriverStation.getAlliance() == Alliance.Blue){
-      startPoint = new Node(poseEstimatorSystem);
-    }
-    else{
-      Pose2d flippedY = new Pose2d(poseEstimatorSystem.getCurrentPose().getX(),FieldConstants.fieldWidth-poseEstimatorSystem.getCurrentPose().getY(),poseEstimatorSystem.getCurrentPose().getRotation());
-      startPoint = new Node(flippedY);
-    }
-    startPoint = new Node(poseEstimatorSystem);
+    startPoint =
+        new Node(
+            poseEstimatorSystem.getCurrentPose().getX(),
+            poseEstimatorSystem.getCurrentPose().getY(),
+            poseEstimatorSystem.getCurrentPose().getRotation());
     PathPlannerTrajectory trajectory;
     List<Node> fullPath = new ArrayList<Node>();
 
@@ -73,44 +71,36 @@ public class PPAStar extends CommandBase {
       }
       fullPath = AStarMap.findPath(startPoint, finalPosition);
     }
-    
-    if(fullPath == null){
-      return;
-    }
-    
-    double startingSpeed = Math.hypot(driveSystem.getChassisSpeeds().vxMetersPerSecond, driveSystem.getChassisSpeeds().vyMetersPerSecond);
-    Rotation2d heading = new Rotation2d(fullPath.get(1).getX()-startPoint.getX(),fullPath.get(1).getY()-startPoint.getY());
-    if(startingSpeed>0.05){
-      heading = new Rotation2d(driveSystem.getChassisSpeeds().vxMetersPerSecond, driveSystem.getChassisSpeeds().vyMetersPerSecond);
-    }
 
     // Depending on if internal points are present, make a new array of the other
     // points in the path.
     PathPoint[] fullPathPoints = new PathPoint[fullPath.size()];
- 
+
     for (int i = 0; i < fullPath.size(); i++) {
       if (i == 0) {
-        fullPathPoints[i] = new PathPoint(new Translation2d(startPoint.getX(), startPoint.getY()), heading,
-            poseEstimatorSystem.getCurrentPose().getRotation(), startingSpeed);
+        fullPathPoints[i] =
+            new PathPoint(
+                new Translation2d(startPoint.getX(), startPoint.getY()), startPoint.getHolRot());
       } else if (i + 1 == fullPath.size()) {
-        fullPathPoints[i] = new PathPoint(new Translation2d(finalPosition.getX(), finalPosition.getY()),
-            new Rotation2d(fullPath.get(i).getX() - fullPath.get(i - 1).getX(), fullPath.get(i).getY() - fullPath.get(i - 1).getY()),
-            finalPosition.getHolRot());
+        fullPathPoints[i] =
+            new PathPoint(
+                new Translation2d(finalPosition.getX(), finalPosition.getY()),
+                finalPosition.getHolRot());
       } else {
-        fullPathPoints[i] = new PathPoint(new Translation2d(fullPath.get(i).getX(), fullPath.get(i).getY()),
-        new Rotation2d(fullPath.get(i + 1).getX() - fullPath.get(i).getX(), fullPath.get(i + 1).getY() - fullPath.get(i).getY()),
-        finalPosition.getHolRot());
+        fullPathPoints[i] =
+            new PathPoint(
+                new Translation2d(fullPath.get(i).getX(), fullPath.get(i).getY()),
+                new Rotation2d(
+                    fullPath.get(i + 1).getX() - fullPath.get(i).getX(),
+                    fullPath.get(i + 1).getY() - fullPath.get(i).getY()));
       }
     }
 
-    // Declare an array to hold PathPoint objects made from all other points
-    // specified in constructor.
+    // Declare an array to hold PathPoint objects made from all other points specified in
+    // constructor.
     trajectory = PathPlanner.generatePath(constraints, Arrays.asList(fullPathPoints));
-    //var alliance = Alliance.Blue;
-    //trajectory = PathPlannerTrajectory.transformTrajectoryForAlliance(trajectory, alliance);
-    trajectory = PathPlannerTrajectory.transformTrajectoryForAlliance(trajectory, DriverStation.getAlliance());
-    
-    pathDrivingCommand = DrivetrainSubsystem.followTrajectory(driveSystem, poseEstimatorSystem, trajectory);
+    pathDrivingCommand =
+        DrivetrainSubsystem.followTrajectory(driveSystem, poseEstimatorSystem, trajectory);
     pathDrivingCommand.schedule();
   }
 

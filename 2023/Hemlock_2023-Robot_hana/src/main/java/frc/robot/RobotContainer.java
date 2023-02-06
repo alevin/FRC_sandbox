@@ -28,7 +28,6 @@ import frc.robot.auto.PPSwerveFollower;
 import frc.robot.commands.ChaseTagCommand;
 import frc.robot.commands.FieldHeadingDriveCommand;
 import frc.robot.commands.FieldOrientedDriveCommand;
-import frc.robot.commands.PPAStar;
 import frc.robot.pathfind.Edge;
 import frc.robot.pathfind.Node;
 import frc.robot.pathfind.Obstacle;
@@ -155,15 +154,15 @@ public class RobotContainer {
    // controller.rightBumper().whileTrue(new RunIntakeCommand(testSubsystem));
    // controller.leftBumper().whileTrue(new ReverseIntakeCommand(testSubsystem));
 
-    controller.x().whileTrue(new PPAStar(
-        drivetrainSubsystem, poseEstimator,
-        new PathConstraints(2, 1.5), new Node(new Translation2d(2.0146, 2.75), Rotation2d.fromDegrees(180)), obstacles,
-        AStarMap));
+    // controller.x().whileTrue(new PPAStar(
+    //     drivetrainSubsystem, poseEstimator,
+    //     new PathConstraints(2, 1.5), new Node(new Translation2d(2.0146, 2.75), Rotation2d.fromDegrees(180)), obstacles,
+    //     AStarMap));
 
-    controller.y().whileTrue(new PPAStar(
-        drivetrainSubsystem, poseEstimator,
-        new PathConstraints(2, 1.5), new Node(new Translation2d(2.0146, 2.75), Rotation2d.fromDegrees(180)), obstacles,
-        AStarMap));
+    // controller.y().whileTrue(new PPAStar(
+    //     drivetrainSubsystem, poseEstimator,
+    //     new PathConstraints(2, 1.5), new Node(new Translation2d(2.0146, 2.75), Rotation2d.fromDegrees(180)), obstacles,
+    //     AStarMap));
 
         // controller.rightBumper().whileTrue(new RunIntakeCommand(testSubsystem));
         // controller.leftBumper().whileTrue(new ReverseIntakeCommand(testSubsystem));

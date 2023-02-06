@@ -1,0 +1,18 @@
+{
+  "HALProvider": {
+    "Other Devices": {
+      "Talon FX[1]": {
+        "header": {
+          "open": true
+        }
+      }
+    }
+  },
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/SmartDashboard/PPSwerveControllerCommand_field": "Field2d",
+      "/SmartDashboard/est feild": "Field2d"
+    }
+  }
+}
