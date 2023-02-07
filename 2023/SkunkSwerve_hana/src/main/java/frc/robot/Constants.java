@@ -9,6 +9,8 @@ import frc.robot.telemetry.tunable.TunablePIDGains;
 import frc.robot.telemetry.tunable.TunableTrapezoidalProfileGains;
 import frc.robot.utils.SwerveModuleConfiguration;
 import frc.robot.utils.SwerveModuleConfiguration.SharedSwerveModuleConfiguration;
+//import static java.lang.Math.PI;
+import static java.lang.Math.toRadians;
 
 /** File containing all constants for the robot. */
 public final class Constants {
@@ -96,16 +98,28 @@ public final class Constants {
                         ACCEPTABLE_STEER_ERROR_RADIANS);
 
         public static final SwerveModuleConfiguration FRONT_LEFT_MODULE_CONFIGURATION = new SwerveModuleConfiguration(
-                1, 2, 9, true, true, -1.22565065, false, SHARED_SWERVE_MODULE_CONFIGURATION);
+                1, 2, 9, 
+                true, true, 
+                toRadians(10),
+                 false, SHARED_SWERVE_MODULE_CONFIGURATION);
 
         public static final SwerveModuleConfiguration FRONT_RIGHT_MODULE_CONFIGURATION = new SwerveModuleConfiguration(
-                3, 4, 11, true, true, 1.30388367, false, SHARED_SWERVE_MODULE_CONFIGURATION);
+                3, 4, 11,
+                 true, true, 
+                 toRadians(180), 
+                 false, SHARED_SWERVE_MODULE_CONFIGURATION);
 
         public static final SwerveModuleConfiguration BACK_LEFT_MODULE_CONFIGURATION = new SwerveModuleConfiguration(
-                7, 8, 12, true, true, 1.37751475, false, SHARED_SWERVE_MODULE_CONFIGURATION);
+                7, 8, 12,
+                 true, true, 
+                 toRadians(0), 
+                 false, SHARED_SWERVE_MODULE_CONFIGURATION);
 
         public static final SwerveModuleConfiguration BACK_RIGHT_MODULE_CONFIGURATION = new SwerveModuleConfiguration(
-                5, 6, 13, true, true, -2.73662173, false, SHARED_SWERVE_MODULE_CONFIGURATION);
+                5, 6, 13,
+                 true, true,
+                  toRadians(0), 
+                  false, SHARED_SWERVE_MODULE_CONFIGURATION);
     }
 
     public static class AutoConstants {

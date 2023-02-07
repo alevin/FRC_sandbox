@@ -40,7 +40,7 @@ public class TelemetryTalonFX extends TalonFX {
     public void logValues() {
         outputAmpsEntry.append(super.getStatorCurrent());
         inputAmpsEntry.append(super.getSupplyCurrent());
-        outputPercentEntry.append(super.getMotorOutputPercent());
+        //outputPercentEntry.append(super.getMotorOutputPercent());
         temperatureEntry.append(super.getTemperature());
     }
 }
