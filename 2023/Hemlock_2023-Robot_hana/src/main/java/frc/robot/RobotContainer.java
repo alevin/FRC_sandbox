@@ -122,8 +122,8 @@ public class RobotContainer {
         poseEstimator::getCurrentPose,
         poseEstimator::setCurrentPose,
         Constants.DrivetrainConstants.KINEMATICS,
-        new PIDConstants(.3, 0, 0),
-        new PIDConstants(3, 0, 0),
+        new PIDConstants(0, 0, 0), //drive
+        new PIDConstants(0, 0, 0), //rotate
         drivetrainSubsystem::setModuleStates,
         eventMap,
         drivetrainSubsystem);
@@ -175,7 +175,10 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return new PPSwerveFollower(drivetrainSubsystem, poseEstimator, "StraightNoRotation", new PathConstraints(2, 1), false);
+    return new PPSwerveFollower(drivetrainSubsystem, poseEstimator, 
+//    "StraightWithRotation", 
+    "StraightNoRotation", 
+    new PathConstraints(5, 2), true);
   }
 
   private static double modifyAxis(double value) {
