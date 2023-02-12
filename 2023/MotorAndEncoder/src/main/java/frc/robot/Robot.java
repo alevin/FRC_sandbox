@@ -4,11 +4,14 @@
 
 package frc.robot;
 
+// import edu.wpi.first.wpilibj.PowerDistribution;
+// import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;
 import org.littletonrobotics.junction.Logger;
+import org.littletonrobotics.junction.inputs.LoggedPowerDistribution;
 import org.littletonrobotics.junction.networktables.NT4Publisher;
 import org.littletonrobotics.junction.wpilog.WPILOGReader;
 import org.littletonrobotics.junction.wpilog.WPILOGWriter;
@@ -34,9 +37,11 @@ public class Robot extends LoggedRobot {
     // autonomous chooser on the dashboard.
     Logger.getInstance().recordMetadata("ProjectName", "MotorEncoder");
     if (isReal()) {
-      Logger.getInstance().addDataReceiver(new WPILOGWriter("//var/tmp/")); // Log to a USB stick
+      Logger.getInstance()
+          .addDataReceiver(new WPILOGWriter(" /home/lvuser/logs")); // Log to a USB stick
       Logger.getInstance().addDataReceiver(new NT4Publisher()); // Publish data to NetworkTables
-      // PowerDistribution temp = new PowerDistribution(1, ModuleType.kRev); //
+      // PowerDistribution temp = new PowerDistribution(1, ModuleType.kAutomatic); //
+      LoggedPowerDistribution.getInstance();
       // Enables power distribution logging
     } else {
       setUseTiming(false); // Run as fast as possible

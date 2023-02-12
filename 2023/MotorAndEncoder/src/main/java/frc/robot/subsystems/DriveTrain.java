@@ -4,7 +4,6 @@
 
 package frc.robot.subsystems;
 
-// import edu.wpi.first.wpilibj.SpeedController;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 // import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
@@ -13,9 +12,11 @@ import edu.wpi.first.wpilibj.XboxController;
 // import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import org.littletonrobotics.junction.Logger;
+// import edu.wpi.first.wpilibj.SpeedController;
 
 public class DriveTrain extends SubsystemBase {
-  //  DifferentialDrive drive;
+  // DifferentialDrive drive;
   WPI_TalonFX m1_Motor;
   private final BoreEncoder boreEncoder;
 
@@ -40,7 +41,10 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void driveWithJoystick(XboxController controller) {
-    m1_Motor.set(ControlMode.PercentOutput, controller.getLeftY() * Constants.SPEED);
+    double lefty = controller.getLeftY();
+    m1_Motor.set(ControlMode.PercentOutput, lefty * Constants.SPEED);
+    Logger.getInstance().recordOutput("XBoxController/LeftY", lefty);
+
     // System.out.println("getY = " + controller.getLeftY());
     boreEncoder.periodic();
   }

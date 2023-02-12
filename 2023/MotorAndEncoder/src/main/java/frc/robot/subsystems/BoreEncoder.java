@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import java.util.Map;
+import org.littletonrobotics.junction.Logger;
 
 public class BoreEncoder extends SubsystemBase {
   private final Encoder m_encoder = new Encoder(7, 8, false, CounterBase.EncodingType.k4X);
@@ -36,10 +37,14 @@ public class BoreEncoder extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     double ticks = m_encoder.get();
+    double rate = m_encoder.getRate();
     // SmartDashboard.putNumber("Encoder ticks", ticks);
-    // SmartDashboard.putNumber("Encoder Rate", m_encoder.getRate());
+
+    SmartDashboard.putNumber("Encoder Rate", m_encoder.getRate());
     SmartDashboard.putNumber("Encoder Distance", m_encoder.getDistance());
     encoderPosition.setDouble(ticks);
-    encoderRate.setDouble(m_encoder.getRate());
+    encoderRate.setDouble(rate);
+    Logger.getInstance().recordOutput("BoreEncoder/Ticks", ticks);
+    Logger.getInstance().recordOutput("BoreEncoder/Rate", rate);
   }
 }
