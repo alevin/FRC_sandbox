@@ -38,10 +38,12 @@ public class BoreEncoder extends SubsystemBase {
     // This method will be called once per scheduler run
     double ticks = m_encoder.get();
     double rate = m_encoder.getRate();
+
     // SmartDashboard.putNumber("Encoder ticks", ticks);
 
     SmartDashboard.putNumber("Encoder Rate", m_encoder.getRate());
     SmartDashboard.putNumber("Encoder Distance", m_encoder.getDistance());
+
     encoderPosition.setDouble(ticks);
     encoderRate.setDouble(rate);
     Logger.getInstance().recordOutput("BoreEncoder/Ticks", ticks);

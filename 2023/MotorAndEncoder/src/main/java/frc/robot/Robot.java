@@ -37,8 +37,7 @@ public class Robot extends LoggedRobot {
     // autonomous chooser on the dashboard.
     Logger.getInstance().recordMetadata("ProjectName", "MotorEncoder");
     if (isReal()) {
-      Logger.getInstance()
-          .addDataReceiver(new WPILOGWriter(" /home/lvuser/logs")); // Log to a USB stick
+      Logger.getInstance().addDataReceiver(new WPILOGWriter("/var/tmp/")); // Log to a USB stick
       Logger.getInstance().addDataReceiver(new NT4Publisher()); // Publish data to NetworkTables
       // PowerDistribution temp = new PowerDistribution(1, ModuleType.kAutomatic); //
       LoggedPowerDistribution.getInstance();
