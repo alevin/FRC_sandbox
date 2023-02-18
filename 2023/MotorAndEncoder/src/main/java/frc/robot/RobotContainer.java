@@ -6,7 +6,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.DriveBackwardTimed;
 import frc.robot.commands.DriveForwardTimed;
 import frc.robot.commands.DriveWithJoystick;
 import frc.robot.subsystems.DriveTrain;
@@ -23,7 +26,10 @@ public class RobotContainer {
   private final DriveTrain driveTrain;
   private final DriveWithJoystick driveWithJoystick;
   private final DriveForwardTimed driveForwardTimed;
+  private final DriveBackwardTimed driveBackwardTimed;
   public static XboxController driverJoystick;
+
+  SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -33,9 +39,18 @@ public class RobotContainer {
     driveTrain.setDefaultCommand(driveWithJoystick);
 
     driveForwardTimed = new DriveForwardTimed(driveTrain);
+    driveBackwardTimed = new DriveBackwardTimed(driveTrain);
+
     driveForwardTimed.addRequirements(driveTrain);
+    driveBackwardTimed.addRequirements(driveTrain);
 
     driverJoystick = new XboxController(0);
+
+    m_chooser.setDefaultOption("Forward Auto", driveForwardTimed);
+    m_chooser.addOption("Backward Auto", driveBackwardTimed);
+
+    Shuffleboard.getTab("Autonomous").add(m_chooser);
+    Shuffleboard.getTab("Drivetrain").add(driveTrain);
 
     // Configure the button bindings
     configureButtonBindings();
@@ -56,6 +71,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
 
-    return driveForwardTimed;
+    // return driveForwardTimed;
+    return m_chooser.getSelected();
   }
 }

@@ -97,6 +97,10 @@ public class DriveTrain extends SubsystemBase {
     m1_Motor.set(ControlMode.PercentOutput, 0.5 * Constants.SPEED);
   }
 
+  public void driveBackward() {
+    m1_Motor.set(ControlMode.PercentOutput, -0.5 * Constants.SPEED);
+  }
+
   public void stop() {
     m1_Motor.set(ControlMode.PercentOutput, 0);
   }
