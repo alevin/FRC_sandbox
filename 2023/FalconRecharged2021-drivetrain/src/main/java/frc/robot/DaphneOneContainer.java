@@ -37,26 +37,26 @@ public class DaphneOneContainer {
     SwerveDriveModule m0 =
         new SwerveDriveModule(
             0,
-            new TalonSRX(DaphneOneConstants.ANGLE1_TALON),
-            new TalonFX(DaphneOneConstants.DRIVE1_TALON),
+            new TalonSRX(DaphneOneConstants.FR_STEER),
+            new TalonFX(DaphneOneConstants.FR_DRIVE),
             169); // 2020: 70
     SwerveDriveModule m1 =
         new SwerveDriveModule(
             1,
-            new TalonSRX(DaphneOneConstants.ANGLE2_TALON),
-            new TalonFX(DaphneOneConstants.DRIVE2_TALON),
+            new TalonSRX(DaphneOneConstants.FL_STEER),
+            new TalonFX(DaphneOneConstants.FL_DRIVE),
             176); // 2020: 211
     SwerveDriveModule m2 =
         new SwerveDriveModule(
             2,
-            new TalonSRX(DaphneOneConstants.ANGLE3_TALON),
-            new TalonFX(DaphneOneConstants.DRIVE3_TALON),
+            new TalonSRX(DaphneOneConstants.BL_STEER),
+            new TalonFX(DaphneOneConstants.BL_DRIVE),
             292); // 2020: 307
     SwerveDriveModule m3 =
         new SwerveDriveModule(
             3,
-            new TalonSRX(DaphneOneConstants.ANGLE4_TALON),
-            new TalonFX(DaphneOneConstants.DRIVE4_TALON),
+            new TalonSRX(DaphneOneConstants.BR_STEER),
+            new TalonFX(DaphneOneConstants.BR_DRIVE),
             28); // 2020: 150
 
     swerveDriveSubsystem = new SwerveDriveSubsystem(m0, m1, m2, m3);

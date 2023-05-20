@@ -16,12 +16,16 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class DaphneOneConstants {
-  public static final int ANGLE2_TALON = 1;
-  public static final int ANGLE1_TALON = 3;
-  public static final int ANGLE3_TALON = 7;
-  public static final int ANGLE4_TALON = 5;
-  public static final int DRIVE1_TALON = 0;
-  public static final int DRIVE2_TALON = 2;
-  public static final int DRIVE3_TALON = 6;
-  public static final int DRIVE4_TALON = 4;
+  // m0 Front Right
+  public static final int FR_DRIVE = 8;
+  public static final int FR_STEER = 1;
+  // m1 Front Left
+  public static final int FL_DRIVE = 6;
+  public static final int FL_STEER = 3;
+  // m2 Back Left
+  public static final int BL_DRIVE = 4;
+  public static final int BL_STEER = 5;
+  // m3 Back Right
+  public static final int BR_DRIVE = 2;
+  public static final int BR_STEER = 7;
 }

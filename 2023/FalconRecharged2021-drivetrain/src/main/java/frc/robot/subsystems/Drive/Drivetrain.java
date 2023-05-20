@@ -10,7 +10,7 @@ package frc.robot.subsystems.Drive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public abstract class Drivetrain extends SubsystemBase {
-  private double speedMultiplier = 0.75; // speed increased from 0.5 to 0.75
+  private double speedMultiplier = 0.3; // speed increased from 0.5 to 0.75
 
   public double getSpeedMultiplier() {
     return speedMultiplier;

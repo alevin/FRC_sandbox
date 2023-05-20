@@ -16,24 +16,24 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static final int CONVEYOR_SPARK = 8;
-  public static final int CONVEYOR_TALON = 8; // change id
-  public static final int INTAKE_SPARK = 9;
-  public static final int CLIMBER1_SPARK = 10;
-  public static final int CLIMBER2_SPARK = 11;
-  public static final int CLIMBER1_TALON = 11; // change id
-  public static final int CLIMBER2_TALON = 10; // change id
-  public static final int INTAKEFORWARD_SOLENOID = 4;
-  public static final int INTAKEREVERSE_SOLENOID = 5;
-  public static final int INTAKEFORWARD_SOLENOID2 = 6;
-  public static final int INTAKEREVERSE_SOLENOID2 = 7;
-  public static final int CLIMBERFORWARD_SOLENOID = 2;
-  public static final int CLIMBERREVERSE_SOLENOID = 3;
-  public static final int COLORPANELFORWARD_SOLENOID = 0;
-  public static final int COLORPANELREVERSE_SOLENOID = 1;
-  public static final int SHOOTER1_TALON = 35;
-  public static final int SHOOTER2_TALON = 36;
-  public static final int SPINNER_SPARK = 51;
+  // public static final int CONVEYOR_SPARK = 8;
+  // public static final int CONVEYOR_TALON = 8; // change id
+  // public static final int INTAKE_SPARK = 9;
+  // public static final int CLIMBER1_SPARK = 10;
+  // public static final int CLIMBER2_SPARK = 11;
+  // public static final int CLIMBER1_TALON = 11; // change id
+  // public static final int CLIMBER2_TALON = 10; // change id
+  // public static final int INTAKEFORWARD_SOLENOID = 4;
+  // public static final int INTAKEREVERSE_SOLENOID = 5;
+  // public static final int INTAKEFORWARD_SOLENOID2 = 6;
+  // public static final int INTAKEREVERSE_SOLENOID2 = 7;
+  // public static final int CLIMBERFORWARD_SOLENOID = 2;
+  // public static final int CLIMBERREVERSE_SOLENOID = 3;
+  // public static final int COLORPANELFORWARD_SOLENOID = 0;
+  // public static final int COLORPANELREVERSE_SOLENOID = 1;
+  // public static final int SHOOTER1_TALON = 35;
+  // public static final int SHOOTER2_TALON = 36;
+  // public static final int SPINNER_SPARK = 51;
   /*
   Physical Controller Number
   */
