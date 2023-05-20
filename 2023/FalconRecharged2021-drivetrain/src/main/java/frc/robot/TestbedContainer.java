@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class TestbedContainer {
 
   private final XboxController mXboxController;
-  private final XboxController mXboxController2; // operator controller
+  //private final XboxController mXboxController2; // operator controller
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public TestbedContainer() {
@@ -29,7 +29,7 @@ public class TestbedContainer {
 
     // create the input controllers
     mXboxController = new XboxController(0);
-    mXboxController2 = new XboxController(1);
+    //mXboxController2 = new XboxController(1);
 
     // setup any default commands
     // colorPanelSpinner.setDefaultCommand(new SpinnerCommand(colorPanelSpinner, mXboxController2));
@@ -61,14 +61,14 @@ public class TestbedContainer {
     JoystickButton start = new JoystickButton(mXboxController, XboxController.Button.kStart.value);
 
     // buttons on the secondary controller ( or operator controller )
-    JoystickButton buttonA_2 = new JoystickButton(mXboxController2, XboxController.Button.kA.value);
-    JoystickButton buttonX_2 = new JoystickButton(mXboxController2, XboxController.Button.kX.value);
-    JoystickButton buttonB_2 = new JoystickButton(mXboxController2, XboxController.Button.kB.value);
-    JoystickButton buttonY_2 = new JoystickButton(mXboxController2, XboxController.Button.kY.value);
-    JoystickButton leftBumper_2 =
-        new JoystickButton(mXboxController2, XboxController.Button.kLeftBumper.value);
-    JoystickButton rightBumper_2 =
-        new JoystickButton(mXboxController2, XboxController.Button.kRightBumper.value);
+    // JoystickButton buttonA_2 = new JoystickButton(mXboxController2, XboxController.Button.kA.value);
+    // JoystickButton buttonX_2 = new JoystickButton(mXboxController2, XboxController.Button.kX.value);
+    // JoystickButton buttonB_2 = new JoystickButton(mXboxController2, XboxController.Button.kB.value);
+    // JoystickButton buttonY_2 = new JoystickButton(mXboxController2, XboxController.Button.kY.value);
+    // JoystickButton leftBumper_2 =
+    //     new JoystickButton(mXboxController2, XboxController.Button.kLeftBumper.value);
+    // JoystickButton rightBumper_2 =
+    //     new JoystickButton(mXboxController2, XboxController.Button.kRightBumper.value);
 
     // hook up button presses to the commands we want
     // buttonA.onTrue(new SpinToColor(colorSensor, colorPanelSpinner));
