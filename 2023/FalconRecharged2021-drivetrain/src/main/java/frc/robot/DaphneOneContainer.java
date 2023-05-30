@@ -39,25 +39,25 @@ public class DaphneOneContainer {
             0,
             new TalonSRX(DaphneOneConstants.FR_STEER),
             new TalonFX(DaphneOneConstants.FR_DRIVE),
-            169); // 2020: 70
+            89);
     SwerveDriveModule m1 =
         new SwerveDriveModule(
             1,
             new TalonSRX(DaphneOneConstants.FL_STEER),
             new TalonFX(DaphneOneConstants.FL_DRIVE),
-            176); // 2020: 211
+            -(95 + 12));
     SwerveDriveModule m2 =
         new SwerveDriveModule(
             2,
             new TalonSRX(DaphneOneConstants.BL_STEER),
             new TalonFX(DaphneOneConstants.BL_DRIVE),
-            292); // 2020: 307
+            180 + 15 + 24);
     SwerveDriveModule m3 =
         new SwerveDriveModule(
             3,
             new TalonSRX(DaphneOneConstants.BR_STEER),
             new TalonFX(DaphneOneConstants.BR_DRIVE),
-            28); // 2020: 150
+            -(90));
 
     swerveDriveSubsystem = new SwerveDriveSubsystem(m0, m1, m2, m3);
 
@@ -96,26 +96,10 @@ public class DaphneOneContainer {
 
     // JoystickButton buttonRB = new JoystickButton(mXboxController,
     // XboxController.Button.kBumperRight.value);
+
     JoystickButton buttonBack =
         new JoystickButton(mXboxController, XboxController.Button.kBack.value);
     // JoystickButton buttonStart = new JoystickButton(mXboxController,
-    // XboxController.Button.kStart.value);
-
-    // JoystickButton buttonY_2 = new JoystickButton(mXboxController2,
-    // XboxController.Button.kY.value);
-    // JoystickButton buttonX_2 = new JoystickButton(mXboxController2,
-    // XboxController.Button.kX.value);
-    // JoystickButton buttonB_2 = new JoystickButton(mXboxController2,
-    // XboxController.Button.kB.value);
-    // JoystickButton buttonA_2 = new
-    // JoystickButton(mXboxController2,XboxController.Button.kA.value);
-    // JoystickButton buttonLB_2 = new JoystickButton(mXboxController,
-    // XboxController.Button.kLeftBumper.value);
-    // //JoystickButton buttonRB_2 = new JoystickButton(mXboxController2,
-    // XboxController.Button.kBumperRight.value);
-    // JoystickButton buttonBack_2 = new JoystickButton(mXboxController2,
-    // XboxController.Button.kBack.value);
-    // JoystickButton buttonStart_2 = new JoystickButton(mXboxController2,
     // XboxController.Button.kStart.value);
 
     buttonBack.onTrue(new ZeroNavX(swerveDriveSubsystem));

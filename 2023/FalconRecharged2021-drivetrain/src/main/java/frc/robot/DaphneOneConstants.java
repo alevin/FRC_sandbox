@@ -18,14 +18,14 @@ package frc.robot;
 public final class DaphneOneConstants {
   // m0 Front Right
   public static final int FR_DRIVE = 8;
-  public static final int FR_STEER = 1;
+  public static final int FR_STEER = 5;
   // m1 Front Left
   public static final int FL_DRIVE = 6;
-  public static final int FL_STEER = 3;
+  public static final int FL_STEER = 7;
   // m2 Back Left
   public static final int BL_DRIVE = 4;
-  public static final int BL_STEER = 5;
+  public static final int BL_STEER = 3;
   // m3 Back Right
   public static final int BR_DRIVE = 2;
-  public static final int BR_STEER = 7;
+  public static final int BR_STEER = 1;
 }

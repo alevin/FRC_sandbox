@@ -18,7 +18,8 @@ public class SwerveDriveSubsystem
   // bugaloo
   private static final double WHEELBASE = 22.5;
   private static final double TRACKWIDTH = 22.5;
-  // private static final double RATIO = Math.sqrt(Math.pow(WHEELBASE, 2) + Math.pow(TRACKWIDTH,
+  // private static final double RATIO = Math.sqrt(Math.pow(WHEELBASE, 2) +
+  // Math.pow(TRACKWIDTH,
   // 2));
   private boolean isAuto;
 
@@ -51,11 +52,13 @@ public class SwerveDriveSubsystem
     mSwerveModules[3] = m3;
     zeroGyro();
 
-    // mSwerveModules[0].getDriveMotor().setInverted(InvertType.InvertMotorOutput); //real: false
+    // mSwerveModules[0].getDriveMotor().setInverted(InvertType.InvertMotorOutput);
+    // //real: false
     // mSwerveModules[2].getDriveMotor().setInverted(true); //
     // mSwerveModules[1].getDriveMotor().setInverted(false); //real: true
     // mSwerveModules[2].getDriveMotor().setInverted(false); //real: false
-    // mSwerveModules[3].getDriveMotor().setInverted(TalonFXInvertType.CounterClockwise); //real:
+    // mSwerveModules[3].getDriveMotor().setInverted(TalonFXInvertType.CounterClockwise);
+    // //real:
     // false
 
     mSwerveModules[0].getAngleMotor().setInverted(true); // real: true
@@ -148,7 +151,7 @@ public class SwerveDriveSubsystem
     double max = speeds[0]; // remove?
 
     for (double speed :
-        speeds) { // regular for loop is preferred here, do we use max anywhere?  -- JMH
+        speeds) { // regular for loop is preferred here, do we use max anywhere? -- JMH
       if (speed > max) {
         max = speed;
       }
@@ -188,7 +191,7 @@ public class SwerveDriveSubsystem
     angleError = Math.max(angleError, -1);
     targetPos =
         (targetPos * Constants.GEAR_RATIO)
-            / (Constants.WHEEL_SIZE * Math.PI); // inches to ticks  -- can remove this magic number?
+            / (Constants.WHEEL_SIZE * Math.PI); // inches to ticks -- can remove this magic number?
     for (int i = 0; i < 4; i++) {
       mSwerveModules[i].setTargetAngle(angle, isAuto); // mSwerveModules[i].getTargetAngle());
       mSwerveModules[i].setTargetDistance(

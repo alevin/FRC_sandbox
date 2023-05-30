@@ -16,30 +16,13 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  // public static final int CONVEYOR_SPARK = 8;
-  // public static final int CONVEYOR_TALON = 8; // change id
-  // public static final int INTAKE_SPARK = 9;
-  // public static final int CLIMBER1_SPARK = 10;
-  // public static final int CLIMBER2_SPARK = 11;
-  // public static final int CLIMBER1_TALON = 11; // change id
-  // public static final int CLIMBER2_TALON = 10; // change id
-  // public static final int INTAKEFORWARD_SOLENOID = 4;
-  // public static final int INTAKEREVERSE_SOLENOID = 5;
-  // public static final int INTAKEFORWARD_SOLENOID2 = 6;
-  // public static final int INTAKEREVERSE_SOLENOID2 = 7;
-  // public static final int CLIMBERFORWARD_SOLENOID = 2;
-  // public static final int CLIMBERREVERSE_SOLENOID = 3;
-  // public static final int COLORPANELFORWARD_SOLENOID = 0;
-  // public static final int COLORPANELREVERSE_SOLENOID = 1;
-  // public static final int SHOOTER1_TALON = 35;
-  // public static final int SHOOTER2_TALON = 36;
-  // public static final int SPINNER_SPARK = 51;
+
   /*
   Physical Controller Number
   */
   public static final double GEAR_RATIO = 7.0;
-  // public static final double WHEEL_SIZE = 3.838;
-  public static final double WHEEL_SIZE = 4; //  wheel size from the doc for HiGrip wheels
+  public static final double WHEEL_SIZE = 3.838;
+  // public static final double WHEEL_SIZE = 4; //  wheel size from the doc for HiGrip wheels
 
   public static final double TICKS_PER_INCH = (2048 * GEAR_RATIO) / (WHEEL_SIZE * Math.PI);
   public static final boolean FORWARD = true;
@@ -47,7 +30,7 @@ public final class Constants {
   public static final double SPINNER_SPEED = 0.2; // only being used in SpinToMid right now
 
   public static final double MOD_TO_CENTER =
-      0.28575; // distance in meter from center point to each swerve module
+      0.23; // distance in meter from center point to each swerve module
 
   public static final double MAX_ANGLE_VELOCITY = 45; // 90;
   public static final double MAX_ANGLE_ACCELERATION = 180;
