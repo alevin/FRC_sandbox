@@ -7,11 +7,14 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import org.littletonrobotics.junction.LoggedRobot;
+import org.littletonrobotics.junction.Logger;
+import org.littletonrobotics.junction.networktables.NT4Publisher;
+import org.littletonrobotics.junction.wpilog.WPILOGWriter;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -19,7 +22,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * the package after creating this project, you must also update the build.gradle file in the
  * project.
  */
-public class Robot extends TimedRobot {
+public class Robot extends LoggedRobot {
   private Command m_autonomousCommand;
 
   private DaphneOneContainer m_daphneOneContainer;
@@ -44,6 +47,9 @@ public class Robot extends TimedRobot {
     // Instantiate our DaphneTwoContainer. This will perform all our button
     // bindings, and put our
     // autonomous chooser on the dashboard.
+    Logger.getInstance().addDataReceiver(new WPILOGWriter("/media/sda1/")); // Log to a USB stick
+    Logger.getInstance().addDataReceiver(new NT4Publisher()); // Publish data to NetworkTables
+
     switch (ROBOT_TYPE) {
       case DAPHNE1:
         m_daphneOneContainer = new DaphneOneContainer();
@@ -70,6 +76,10 @@ public class Robot extends TimedRobot {
     // Autonomous(m_daphneTwoContainer.createAutonomousPath2()));
 
     SmartDashboard.putData(autoChooser);
+
+    Logger.getInstance()
+        .start(); // Start logging! No more data receivers, replay sources, or metadata values may
+    // be added.
   }
 
   /**

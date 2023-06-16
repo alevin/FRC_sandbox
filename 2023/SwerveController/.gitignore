@@ -109,7 +109,6 @@ Temporary Items
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-!.vscode/style.xml
 
 ### Windows ###
 # Windows thumbnail cache files
@@ -138,7 +137,7 @@ $RECYCLE.BIN/
 
 ### Gradle ###
 .gradle
-build/
+/build/
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -159,20 +158,15 @@ gradle-app.setting
 .settings/
 bin/
 
-# Simulation GUI and other tools window save files
+# IntelliJ
+*.iml
+*.ipr
+*.iws
+.idea/
+out/
+
+# Fleet
+.fleet
+
+# Simulation GUI and other tools window save file
 *-window.json
-simgui*.json
-networktables.json
-
-# Python files
-**/__pycache__
-**/venv
-
-# Version file
-src/main/java/org/littletonrobotics/frc2023/BuildConstants.java
-
-# Arm trajectory cache
-src/main/deploy/arm_trajectory_cache.json
-
-*/main/java/frc/robot/BuildConstants.java
-
