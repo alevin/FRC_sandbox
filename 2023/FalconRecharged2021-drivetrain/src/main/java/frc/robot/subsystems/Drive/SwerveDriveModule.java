@@ -18,7 +18,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.commands.swervedrive.Autonomous;
 import frc.robot.commands.swervedrive.SwerveModuleCommand;
+import org.littletonrobotics.junction.Logger;
 
+// @AutoLog
 public class SwerveDriveModule extends SubsystemBase {
   /** Creates a new SwerveDriveModule. */
 
@@ -143,6 +145,18 @@ public class SwerveDriveModule extends SubsystemBase {
   }
 
   public TalonSRX getAngleMotor() {
+    Logger.getInstance()
+        .recordOutput(
+            "Steer_Motor_" + mAngleMotor.getDeviceID() + "/SupplyCurrent",
+            mAngleMotor.getSupplyCurrent());
+    Logger.getInstance()
+        .recordOutput(
+            "Steer_Motor_" + mAngleMotor.getDeviceID() + "/MotorOutputPercent",
+            mAngleMotor.getMotorOutputPercent());
+    Logger.getInstance()
+        .recordOutput(
+            "Steer_Motor_" + mAngleMotor.getDeviceID() + "/SelectedSensorPosition",
+            mAngleMotor.getSelectedSensorPosition());
     return mAngleMotor;
   }
 
@@ -156,7 +170,7 @@ public class SwerveDriveModule extends SubsystemBase {
     angle -= mZeroOffset;
     angle %= 360;
     if (angle < 0) angle += 360;
-
+    Logger.getInstance().recordOutput("Steer_Motor_" + mAngleMotor.getDeviceID() + "/Angle", angle);
     return angle;
   }
 
@@ -170,6 +184,8 @@ public class SwerveDriveModule extends SubsystemBase {
 
     targetAngle %= 360;
 
+    Logger.getInstance()
+        .recordOutput("Module_" + mModuleNumber + "/TargetAngle", targetAngle % 360);
     SmartDashboard.putNumber("Module Target Angle " + mModuleNumber, targetAngle % 360);
 
     targetAngle += mZeroOffset;
@@ -204,6 +220,9 @@ public class SwerveDriveModule extends SubsystemBase {
     // mLastError = currentError;
 
     targetAngle *= 1024.0 / 360.0;
+
+    Logger.getInstance().recordOutput("Module_" + mModuleNumber + "/TargetAngleSet", targetAngle);
+
     mAngleMotor.set(ControlMode.Position, targetAngle);
   }
 

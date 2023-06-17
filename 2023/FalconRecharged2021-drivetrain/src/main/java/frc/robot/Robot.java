@@ -8,7 +8,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import org.littletonrobotics.junction.LoggedRobot;
@@ -50,23 +49,31 @@ public class Robot extends LoggedRobot {
     Logger.getInstance().addDataReceiver(new WPILOGWriter("/media/sda1/")); // Log to a USB stick
     Logger.getInstance().addDataReceiver(new NT4Publisher()); // Publish data to NetworkTables
 
+    //  if (isReal()) {
+    //     Logger.getInstance().addDataReceiver(new WPILOGWriter("/media/sda1"));
+    //     Logger.getInstance().addDataReceiver(new NT4Publisher());
+    // } else {
+    //     String logPath = LogFileUtil.findReplayLog();
+    //     logger.setReplaySource(new WPILOGReader(logPath));
+    //     logger.addDataReceiver(new WPILOGWriter(LogFileUtil.addPathSuffix(logPath, "_sim")));
+    // }
     switch (ROBOT_TYPE) {
       case DAPHNE1:
         m_daphneOneContainer = new DaphneOneContainer();
         // m_daphneOneContainer.getLimelight().setCamMode(); // not sure what this did
         // in
         // master branch
-        m_autonomousCommand = m_daphneOneContainer.getAutonomousCommand();
+        // m_autonomousCommand = m_daphneOneContainer.getAutonomousCommand();
         break;
       case TESTBED:
         m_testbedContainer = new TestbedContainer();
-        m_autonomousCommand = m_testbedContainer.getAutonomousCommand();
+        // m_autonomousCommand = m_testbedContainer.getAutonomousCommand();
         break;
       default:
         // unexpected, will crash later
         break;
     }
-    autoChooser = new SendableChooser<Command>();
+    // autoChooser = new SendableChooser<Command>();
 
     // autoChooser.addOption("Move Forward 1", new
     // Autonomous(m_daphneTwoContainer.createAutonomousPath()));
@@ -75,7 +82,7 @@ public class Robot extends LoggedRobot {
     // autoChooser.addOption("Move Forward 3", new
     // Autonomous(m_daphneTwoContainer.createAutonomousPath2()));
 
-    SmartDashboard.putData(autoChooser);
+    // SmartDashboard.putData(autoChooser);
 
     Logger.getInstance()
         .start(); // Start logging! No more data receivers, replay sources, or metadata values may

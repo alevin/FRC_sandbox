@@ -12,6 +12,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
+import org.littletonrobotics.junction.Logger;
 
 public class SwerveDriveSubsystem
     extends HolonomicDrivetrain { // + is clockwise - is counter clockwise test commit 2 electric
@@ -141,6 +142,11 @@ public class SwerveDriveSubsystem
           Math.sqrt(a * a + d * d),
           Math.sqrt(a * a + c * c)
         };
+
+    Logger.getInstance().recordOutput("Module_0" + "/Position", mSwerveModules[0].getPosition());
+    Logger.getInstance().recordOutput("Module_1" + "/Position", mSwerveModules[1].getPosition());
+    Logger.getInstance().recordOutput("Module_2" + "/Position", mSwerveModules[2].getPosition());
+    Logger.getInstance().recordOutput("Module_3" + "/Position", mSwerveModules[3].getPosition());
 
     // SmartDashboard.putNumber("Module 0 Ticks", mSwerveModules[0].getPosition());
     // SmartDashboard.putNumber("Module 1 Ticks", mSwerveModules[1].getPosition());
