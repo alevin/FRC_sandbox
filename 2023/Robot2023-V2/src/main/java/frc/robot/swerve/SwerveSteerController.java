@@ -1,6 +1,5 @@
 package frc.robot.swerve;
 
-import static frc.robot.Constants.DrivetrainConstants.CANIVORE_NAME;
 import static frc.robot.Constants.DrivetrainConstants.STEER_kD;
 import static frc.robot.Constants.DrivetrainConstants.STEER_kI;
 import static frc.robot.Constants.DrivetrainConstants.STEER_kP;
@@ -21,6 +20,7 @@ import com.ctre.phoenix.sensors.SensorInitializationStrategy;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardContainer;
+import org.littletonrobotics.junction.Logger;
 
 public class SwerveSteerController {
 
@@ -50,7 +50,8 @@ public class SwerveSteerController {
       int canCoderPort,
       double canCoderOffset,
       ShuffleboardContainer container,
-      ModuleConfiguration moduleConfiguration) {
+      ModuleConfiguration moduleConfiguration,
+      String canivoreName) {
 
     CANCoderConfiguration config = new CANCoderConfiguration();
     config.absoluteSensorRange = AbsoluteSensorRange.Unsigned_0_to_360;
@@ -58,7 +59,7 @@ public class SwerveSteerController {
     config.sensorDirection = false;
     config.initializationStrategy = SensorInitializationStrategy.BootToAbsolutePosition;
 
-    encoder = new CANCoder(canCoderPort, CANIVORE_NAME);
+    encoder = new CANCoder(canCoderPort, canivoreName);
     CtreUtils.checkCtreError(
         encoder.configAllSettings(config, 250), "Failed to configure CANCoder");
     CtreUtils.checkCtreError(
@@ -89,7 +90,7 @@ public class SwerveSteerController {
     motorConfiguration.supplyCurrLimit.currentLimit = 20;
     motorConfiguration.supplyCurrLimit.enable = true;
 
-    motor = new WPI_TalonFX(motorPort, CANIVORE_NAME);
+    motor = new WPI_TalonFX(motorPort, canivoreName);
     CtreUtils.checkCtreError(
         motor.configAllSettings(motorConfiguration, CAN_TIMEOUT_MS),
         "Failed to configure Falcon 500 settings");
@@ -109,9 +110,42 @@ public class SwerveSteerController {
     configMotorOffset(true);
 
     // Reduce CAN status frame rates
+    /**
+     * Set the CAN status frames.
+     *
+     * @param CANStatus1 Applied Motor Output, Fault Information, Limit Switch Information
+     * @param CANStatus2 Selected Sensor Position (PID 0), Selected Sensor Velocity (PID 0), Brushed
+     *     Supply Current Measurement, Sticky Fault Information
+     * @param CANStatus3 Quadrature Information
+     * @param CANStatus4 Analog Input, Supply Battery Voltage, Controller Temperature
+     * @param CANStatus8 Pulse Width Information
+     * @param CANStatus10 Motion Profiling/Motion Magic Information
+     * @param CANStatus12 Selected Sensor Position (Aux PID 1), Selected Sensor Velocity (Aux PID 1)
+     * @param CANStatus13 PID0 (Primary PID) Information
+     * @param CANStatus14 PID1 (Auxiliary PID) Information
+     * @param CANStatus21 Integrated Sensor Position (Talon FX), Integrated Sensor Velocity (Talon
+     *     FX)
+     * @param CANStatusCurrent Brushless Supply Current Measurement, Brushless Stator Current
+     *     Measurement
+     */
     CtreUtils.checkCtreError(
-        motor.setStatusFramePeriod(
-            StatusFrameEnhanced.Status_1_General, STATUS_FRAME_GENERAL_PERIOD_MS, CAN_TIMEOUT_MS),
+        motor.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 61),
+        "Failed to configure Falcon status frame period");
+
+    CtreUtils.checkCtreError(
+        motor.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 71),
+        "Failed to configure Falcon status frame period");
+
+    CtreUtils.checkCtreError(
+        motor.setStatusFramePeriod(StatusFrameEnhanced.Status_4_AinTempVbat, 89),
+        "Failed to configure Falcon status frame period");
+
+    CtreUtils.checkCtreError(
+        motor.setStatusFramePeriod(StatusFrameEnhanced.Status_7_CommStatus, 211),
+        "Failed to configure Falcon status frame period");
+
+    CtreUtils.checkCtreError(
+        motor.setStatusFramePeriod(StatusFrameEnhanced.Status_Brushless_Current, 43),
         "Failed to configure Falcon status frame period");
 
     addDashboardEntries(container);
@@ -207,6 +241,16 @@ public class SwerveSteerController {
         adjustedReferenceAngleRadians / motorEncoderPositionCoefficient);
 
     this.desiredAngleRadians = desiredAngleRadians;
+
+    Logger.getInstance()
+        .recordOutput("Steer_Motor_" + motor.getDeviceID() + "/SupplyCurrent", getSupplyCurrent());
+    Logger.getInstance()
+        .recordOutput("Steer_Motor_" + motor.getDeviceID() + "/StatorCurrent", getStatorCurrent());
+    Logger.getInstance()
+        .recordOutput(
+            "Steer_Motor_" + motor.getDeviceID() + "/MotorOutputPercent", getMotorOutputPercent());
+    Logger.getInstance()
+        .recordOutput("Steer_Motor_" + motor.getDeviceID() + "/Temperature", getTemperature());
   }
 
   public Rotation2d getStateRotation() {
@@ -217,6 +261,26 @@ public class SwerveSteerController {
     }
 
     return new Rotation2d(motorAngleRadians);
+  }
+
+  public double getSupplyCurrent() {
+    return motor.getSupplyCurrent();
+  }
+
+  public double getStatorCurrent() {
+    return motor.getStatorCurrent();
+  }
+
+  public double getMotorOutputPercent() {
+    return motor.getMotorOutputPercent();
+  }
+
+  public double getTemperature() {
+    return motor.getTemperature();
+  }
+
+  public double getVelocity() {
+    return encoder.getVelocity();
   }
 
   /**
