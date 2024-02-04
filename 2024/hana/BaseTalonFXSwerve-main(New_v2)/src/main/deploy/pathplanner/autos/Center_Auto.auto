@@ -1,0 +1,32 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.33,
+      "y": 5.5
+    },
+    "rotation": 180.0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Center_Path"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "folder": "Auto's",
+  "choreoAuto": false
+}
